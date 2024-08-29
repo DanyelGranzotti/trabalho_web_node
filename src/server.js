@@ -7,16 +7,13 @@ const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
-const PORT = process.env.PORT || 6969;
+const PORT = process.env.PORT || 3000;
 
 mongoose
-  .connect(
-    "mongodb+srv://danyelgranzotti:senhapokemon@pokemoncluster.z88fd.mongodb.net/",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Mongo Connection Open");
   })

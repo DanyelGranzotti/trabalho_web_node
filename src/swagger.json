@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Pokémon API",
-    "description": "API para gerenciamento de Pokémons, fornecendo métodos CRUD."
+    "description": "API CRUD de Pokémons."
   },
   "host": "localhost:3000",
   "basePath": "/",
