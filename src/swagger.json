@@ -1,0 +1,185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Pokémon API",
+    "description": "API para gerenciamento de Pokémons, fornecendo métodos CRUD."
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pokemons": {
+      "get": {
+        "summary": "Listar todos os Pokémons",
+        "description": "Retorna uma lista de todos os Pokémons cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Lista de Pokémons retornada com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pokemon"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "summary": "Adicionar um novo Pokémon",
+        "description": "Adiciona um novo Pokémon ao banco de dados.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados do Pokémon a ser criado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pokémon criado com sucesso.",
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/pokemons/{id}": {
+      "get": {
+        "summary": "Obter detalhes de um Pokémon",
+        "description": "Retorna os detalhes de um Pokémon específico pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Pokémon",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do Pokémon retornados com sucesso.",
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          },
+          "404": {
+            "description": "Pokémon não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar um Pokémon",
+        "description": "Atualiza os dados de um Pokémon específico pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Pokémon",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados atualizados do Pokémon",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pokémon atualizado com sucesso.",
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          },
+          "404": {
+            "description": "Pokémon não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover um Pokémon",
+        "description": "Remove um Pokémon específico pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Pokémon",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pokémon removido com sucesso."
+          },
+          "404": {
+            "description": "Pokémon não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pokemon": {
+      "type": "object",
+      "required": ["name", "number", "pokemon_type", "image"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Pikachu",
+          "description": "Nome do Pokémon."
+        },
+        "number": {
+          "type": "number",
+          "example": 25,
+          "description": "Número do Pokémon na Pokédex."
+        },
+        "pokemon_type": {
+          "type": "string",
+          "example": "fire",
+          "description": "Tipo do Pokémon.",
+          "enum": ["normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+        },
+        "image": {
+          "type": "string",
+          "example": "https://example.com/pikachu.png",
+          "description": "URL da imagem do Pokémon."
+        }
+      }
+    }
+  }
+}
