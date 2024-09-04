@@ -1,9 +1,22 @@
 const pokemonModel = require("../models/pokemon");
 
-const getAllPokemons = async (_req, res) => {
+const getAllPokemons = async (req, res) => {
   try {
-    const pokemons = await pokemonModel.find({});
-    res.status(200).send(pokemons);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+
+    const pokemons = await pokemonModel.find({}).skip(skip).limit(limit);
+
+    const total = await pokemonModel.countDocuments({});
+
+    res.status(200).send({
+      pokemons,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalPokemons: total,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: error.message });

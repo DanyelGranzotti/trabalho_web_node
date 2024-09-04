@@ -22,13 +22,48 @@
       "get": {
         "summary": "Listar todos os Pokémons",
         "description": "Retorna uma lista de todos os Pokémons cadastrados.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número da página para paginação.",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Número de Pokémons por página.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          }
+        ],
         "responses": {
           "200": {
             "description": "Lista de Pokémons retornada com sucesso.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pokemon"
+              "type": "object",
+              "properties": {
+                "pokemons": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Pokemon"
+                  }
+                },
+                "currentPage": {
+                  "type": "integer",
+                  "description": "Página atual."
+                },
+                "totalPages": {
+                  "type": "integer",
+                  "description": "Número total de páginas."
+                },
+                "totalPokemons": {
+                  "type": "integer",
+                  "description": "Número total de Pokémons."
+                }
               }
             }
           },
@@ -171,7 +206,7 @@
         },
         "pokemon_type": {
           "type": "string",
-          "example": "fire",
+          "example": "electric",
           "description": "Tipo do Pokémon.",
           "enum": ["normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
         },
