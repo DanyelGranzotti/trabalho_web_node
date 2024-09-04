@@ -5,7 +5,7 @@
     "title": "Pokémon API",
     "description": "API CRUD de Pokémons."
   },
-  "host": "trabalho-web-node.vercel.app",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "https",
