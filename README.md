@@ -26,3 +26,7 @@ docker-compose up
 ~~~
 #### 4. Acessar Swagger da API
 A aplicação estará disponível em `http://localhost:3000/api-docs/`
+
+
+### Deploy da Aplicação
+O swagger da versão da aplicação em produção pode ser acessada em: https://trabalho-web-node.vercel.app/api-docs/
