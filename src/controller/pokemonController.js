@@ -26,7 +26,7 @@ const getAllPokemons = async (req, res) => {
 const getPokemonById = async (req, res) => {
   const { id } = req.params;
   try {
-    const pokemon = await pokemonModel.find({ id: id });
+    const pokemon = await pokemonModel.find({ _id: id });
     if (!pokemon) {
       return res.status(404).send({ message: "Pokémon não encontrado" });
     }
